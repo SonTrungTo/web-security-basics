@@ -23,5 +23,12 @@ control of the app or read sensitive data.
 Injection to browser.
 - Stored XSS scripting attacks: JS is written from DB and browser executes.
   - Escape HTML characters: control entity -> entity encoding (e.g, `&` => `&amp;`)
-  - Implement Content Security Policy.
-- 
+  - Implement Content Security Policy: states where javascript source are allowed.
+    - `Content-Security-Policy: script-src 'self' https//...`
+    - `Content-Security-Policy: script-src 'self'; report-uri https://example.com`
+- Reflected XSS scripting attacks: inject malicious JS via HTTP requests.
+  - Escape HTML characters.
+  - More common in search page or error pages.
+- DOM-based XSS scripting attacks: Attacks based on URI fragments. Only client and server cannot detect.
+  - Escape HTMl characters.
+
