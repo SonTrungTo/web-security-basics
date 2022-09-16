@@ -32,3 +32,22 @@ Injection to browser.
 - DOM-based XSS scripting attacks: Attacks based on URI fragments. Only client and server cannot detect.
   - Escape HTMl characters.
 
+## Cross-site request forgery attacks (CSRF/XSRF)
+Clicking malicious link that generates unintended behaviours. \
+`Example`: Previous GET requests on Twitter can create a post => unwanted behaviours.
+
+**Solutions**:
+
+  - Follow REST principles: GET should not change the state of a server.
+Similarly, use POST -> modify an object, PUT -> create new object,
+DELETE -> delete an object.
+  - Implement anti-CSRF cookies: 
+    - Users may be tricked into submitting a form/script in a 3rd
+    party website controlled by the attacker.
+    - Sensitive actions can be performed in reponse to such POST
+    requests. We would like to ensure that such actions can only
+    come from login requests on our site.
+    - *anti-CSRF cookie*: randomized string written out to a named cookie parameter.
+    - Server: `Set-Cookie: _xsrf=<random_string_A>` in res.header
+    - Browser: `Cookie: _xsrf=<random_string_A>` in req.header
+  
