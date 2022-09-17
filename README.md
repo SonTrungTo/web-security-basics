@@ -50,4 +50,16 @@ DELETE -> delete an object.
     - *anti-CSRF cookie*: randomized string written out to a named cookie parameter.
     - Server: `Set-Cookie: _xsrf=<random_string_A>` in res.header
     - Browser: `Cookie: _xsrf=<random_string_A>` in req.header
-  
+  - SameSite Cookie attribute.
+    - By default, any requests coming to site A will be attached a
+    last known cookie.
+    - Malicious 3rd party website can use this cookie (stolen) to
+    create a CSRF attack.
+    - `Set-Cookie: _xsrf=<random_string_A>; SameSite=strict` => strip
+    any cookie from external sources (not from site A).
+    - Would be painful if anytime someone shares a video, you have to 
+    login back to your site A.
+    - `Set-Cookie: _xsrf=<random_string_A>; SameSite=lax` => only GET
+    requests are allowed to send cookies from another site.
+  - Bonus: Require Re-authentication for sensitive actions.
+    - Like when you are about to pay money via online bank accounts.
