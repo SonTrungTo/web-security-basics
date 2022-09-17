@@ -99,4 +99,8 @@ Breaking your logins.
       - Logging out should clear session cookie in the browser *and*
       invalidate the session identifier on the server side.
     - Preventing user enumeration
-    
+      - Preventing opportunity to know your valid username/email
+      - Implementing CAPTCHA (Completely Automated Public Turing Test
+      to tell Computer and Human Apart).
+
+
