@@ -99,8 +99,39 @@ Breaking your logins.
       - Logging out should clear session cookie in the browser *and*
       invalidate the session identifier on the server side.
     - Preventing user enumeration
-      - Preventing opportunity to know your valid username/email
+      - Keep the messages generic.
       - Implementing CAPTCHA (Completely Automated Public Turing Test
       to tell Computer and Human Apart).
 
+## Session Hijacking
+A *session* is a conversation between browser and the server via HTTP
+requests of an authenticated user.
 
+A hacker can steal someone else's valid session while it's in progress.
+This is called *session hijacking*.
+
+There are 3 ways:
+  - **Cookie theft**
+    - Server-side session: session state stored in memory(cache)/
+    database from the server => scalability problem.
+    - Client-side session: session state stored in the browser
+    => security issue: either encrypt session state before sending
+    back to the client or digitally sign the session state.
+    - To prevent, `Set-Cookie: session_state=<...>; HttpOnly; Secure;
+    SameSite=Lax` returned by the server.
+      - `HttpOnly` => prevent JS script from reading `Cookie` header.
+      - `Secure` => prevent *man-in-the-middle* attack, sniffing
+      traffics between browser and the server.
+      - `SameSite=Lax` => prevent CSRF attack, an indirect interaction
+      on your site by the hacker.
+  - **Session fixation**
+    - For legacy websites.
+    - An attacker attach a dummy sessionId on the URL and send the link
+    with that sessionId to a user, who authenticate the link, and now
+    the dummy sessionId becomes the real sessionId.
+  - **Weak session IDs**
+    - Brute-force attack on sessionId.
+    - Guess the seeds value. Rarely a random number is generated
+    in software development.
+    - The seeds value ranges from system-clock to some hashed object
+    => use strong generated-random value.
