@@ -135,3 +135,40 @@ There are 3 ways:
     in software development.
     - The seeds value ranges from system-clock to some hashed object
     => use strong generated-random value.
+
+## Permission
+
+Facebook's 2018 debacle: hacker exploits a bug in video uploading and
+generates access tokens to compromise nearly 50 millions users'
+accounts.
+
+  - *Privilege escalation*: a malicious user usurps the permission of
+  another user.
+    - *Vertical escalation*: a hacker tries to access root's permission
+    => usurp the user's permission. (e.g, by installing *web shell* on
+    an OS in which a web server is running)
+    - *Horizontal escalation*: access another account with similar 
+    privilege. Similar to Facebook's debacle, an API
+    that grants access tokens without checking user's permission.
+    Others including: guessing passwords, session hijacking,
+    maliciously crafted HTTP requests.
+
+**Solutions**:
+### Access Control
+The process of securing users to correctly identify them with 
+permissions.
+
+  - **Authentication**: Correctly identify a user when he/she returns 
+  to the site.
+  - **Authorization**: Assign to the user what he/she are allowed and
+  not allowed to do.
+  - **Permission checking**: Check these permissions every time
+  a user performs a sensitive action.
+
+A good access control includes:
+  1. Choosing an authorization model
+      - **Access Control Lists(ACLs)**: 
+  2. Implementing an access control
+  3. Testing the access control
+  4. Implementing audit trails
+  5. Avoiding common oversights
