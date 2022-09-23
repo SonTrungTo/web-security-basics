@@ -168,6 +168,9 @@ permissions.
 A good access control includes:
   1. Choosing an authorization model
       - **Access Control Lists(ACLs)**: 
+      - **Whitelists and Blacklists**: 
+      - **Role-Based Access Control(RBAC)**: 
+      - **Ownership-Based Access Control**: 
   2. Implementing an access control
   3. Testing the access control
   4. Implementing audit trails
