@@ -201,3 +201,19 @@ Mitigations for directory traversal:
   4. Sanitize file references: banning file separator,
   including encoded ones, or using regex (third-party codes)
 
+## Information Leaks
+
+Revealing techstacks of your software => security problems
+
+**Solutions**:
+
+  1. Disable `Server` header. (or wrong `Server` header).
+  2. Use clean URLs (without extensions `.php`,  `.js`, etc...)
+  3. Use generic cookie params, so that attackers cannot recognize
+  your language stacks.
+  4. Silent all client errors (e.g, use `webpack`)
+  5. Minify and/or obfuscate JS codes (e.g, `uglifyJS`)
+  6. Sanitize client-side files (with `webpack`, for example)
+
+Also stay up-to-date  with security updates.
+
