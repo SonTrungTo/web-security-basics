@@ -152,6 +152,11 @@ accounts.
     that grants access tokens without checking user's permission.
     Others including: guessing passwords, session hijacking,
     maliciously crafted HTTP requests.
+  
+  - *Directory traversal*: use to download files which an attacker
+  is not supposed to by traversing back URL. \
+  Example: `https://some_host/menu=../../file/pwd.pdf`
+
 
 **Solutions**:
 ### Access Control
@@ -167,11 +172,32 @@ permissions.
 
 A good access control includes:
   1. Choosing an authorization model
-      - **Access Control Lists(ACLs)**: 
-      - **Whitelists and Blacklists**: 
-      - **Role-Based Access Control(RBAC)**: 
-      - **Ownership-Based Access Control**: 
+      - **Access Control Lists(ACLs)**: similar to how
+      Linux filesystem, or SQL DB works, etc...
+      - **Whitelists and Blacklists**: similar to
+      browsers, or email filtering.
+      - **Role-Based Access Control(RBAC)**: AWS IAM,
+      MS Active Directory,...
+      - **Ownership-Based Access Control**: Facebook,
+      Instagram,...
   2. Implementing an access control
   3. Testing the access control
   4. Implementing audit trails
+      - *Audit trails* are log files everytime a user
+      performs an action => diagnose the problems.
   5. Avoiding common oversights
+      - *Security through obscurity*: relying on
+      an attacker unable to guess the URL => a security risk.
+      - Particularly important for sites designed to *embargo*
+      resources, making them accessible at only a certain point
+      in time.
+
+Mitigations for directory traversal:
+  1. Serve files using web server.
+  2. Use a hosting service: CDN, AWS S3 or CMS,...
+  3. Use indirect file reference: assign a file served
+  on local disk a unique ID, which references to a path
+  inside a database.
+  4. Sanitize file references: banning file separator,
+  including encoded ones, or using regex (third-party codes)
+
