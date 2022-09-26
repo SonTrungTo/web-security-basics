@@ -219,8 +219,52 @@ Also stay up-to-date  with security updates.
 
 ## Encryption
 HTTPS (HTTP Secure) is HTTP protocol that uses TLS (Transport Layer
-Security).
+Security). There are 3 stages of communication between browser and
+server after TLS handshake (cipher suites):
+
+  - Key-exchange algorithm.
+  - Exchanging TCP data using the above encryption key from
+  a digital cert (most likely Let's Encrypt).
+  - Assigning each such package a MAC (Message Authentication Code)
+  hashed by the encryption key.
 
 Steps:
   1. Enabling HTTPS
+      - To obtain digital certificate from a certified certificate
+      distributor (e.g, Let's Encrypt,...)
+      - Generate a CSR(*Certificate signing request*) from a private 
+      key:
+      `openssl req -new -key ./private.key -out ./request.csr`
+      (contains the public key and domain name)
+      - Domain verification: Authority verifies that you have EDIT 
+      right and you own the domain. Some have *extended validation
+      certificates*
+      - Certs need to be renewed.
+      - *Self-signed ceritificate* is used for testing env.
+      - Configs your web-server's Nginx to use HTTPS:
+
+      ```
+      server {
+        listen                443 ssl;
+        server_name           www.example.com;
+        ssl_certificate       www.example.com.srt;
+        ssl_certificate_key   www.example.com.key;
+        ssl_protocols         TLSv1.2 TLSv1.3;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+      }
+      ```
+      This is called *terminating* HTTPS at web-server because there
+      are no TSL in communication between web-server and application-
+      server.
   
+      - Redirecting HTTP to HTTPS,
+
+      ```
+      server {
+        listen                80 default_server;
+        server_name            _;
+        return 301 https://$host$request_uri;
+      }
+      ```
+
+      - 
