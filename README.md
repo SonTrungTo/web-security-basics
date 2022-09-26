@@ -217,3 +217,10 @@ Revealing techstacks of your software => security problems
 
 Also stay up-to-date  with security updates.
 
+## Encryption
+HTTPS (HTTP Secure) is HTTP protocol that uses TLS (Transport Layer
+Security).
+
+Steps:
+  1. Enabling HTTPS
+  
