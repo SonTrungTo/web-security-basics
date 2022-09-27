@@ -320,3 +320,7 @@ Steps:
       of death*.
   - **Mitigation**:
       1. Firewalls and Intrusion Prevention Systems
+      2. Distributed DoS Protection Service (usually offered by CDN)
+      3. Building for Scale: CDN to offload serving static contents;
+      Memcache, Redis for caching database queries; using asynchronous
+      for long-running tasks (AWS SQS); deploying multiple web-servers.
