@@ -267,4 +267,56 @@ Steps:
       }
       ```
 
-      - 
+      - Strict Transport Security: ensure HTTPS only
+
+
+## Third-party modules
+  - Secure your env variables and use AWS System Management Parameter
+  - Watch out for an attack vector from a 3rd party service.
+
+## XML attacks
+  - XML (Extensible Markup Language) is a machine-readable equivalence
+  of HTML.
+  - JSON and YAML has started to be using more than XML.
+  - Nevertheless, XML remains a vulnerability worth an attention.
+  - There are 2 types of grammar files: DTDs (Document Type 
+  Definition) and XSDs (XML Schema Definition). DTDs are
+  more vulnerable to XML Bombs and XML external entity attack.
+  - XML Bombs: overloading the XML parser => creating DDoS (Denial
+  of Service Attack).
+  - XML external entity attack: send http or file://, making
+  server-side request response back an XML file with sensitive
+  information.
+
+=> disable inline DTDs parsing.
+
+## Accessory
+  - Be careful of phishing links, email spams and  clickjacking.
+  - Clickjacking is a vulnerable by tricking a user to click an
+  iframe of another website, but infact clicking on a URL
+  that an attacker controls.
+
+  ```
+  Content-Security-Policy: frame-ancestors 'self'
+  ```
+
+## Denial of Service Attacks
+  - Making it unavailable to other users.
+  - **Types**:
+      1. Internet Control Message Protocol Attacks (ICMP):
+      overloading with 'ping' message/corrupted  message.
+      2. Transmission Control Protocol Attacks: overloading
+      with SYN handshakes.
+      3. Application Layer Attacks: abusing HTTP requests
+      to overload the server's connection pool. (e.g, 
+      XML bombs,...) 
+      4. Reflected and Amplified attacks: taking
+      advantage of 3rd-party service to "reflect" or "amplify"
+      attack.
+      5. Distributed DoS attacks: coming from a multiple,
+      coordinating sources. In addition to reflection,
+      these are also from botnet.
+      6. Unintentional surge in users' activity: Reddig *hug
+      of death*.
+  - **Mitigation**:
+      1. Firewalls and Intrusion Prevention Systems
